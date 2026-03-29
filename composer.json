@@ -1,0 +1,87 @@
+{
+	"name": "citomni/vectorembedding",
+	"description": "Lean vector embedding provider package for CitOmni: Unified embedding request/response format, provider adapters, and reuse of the existing Curl infrastructure service.",
+	"type": "library",
+	"license": "MIT",
+	"homepage": "https://github.com/citomni/vectorembedding",
+	"keywords": [
+		"ai",
+		"embedding",
+		"embeddings",
+		"vector",
+		"semantic-search",
+		"openai",
+		"gemini",
+		"api",
+		"curl",
+		"http",
+		"php",
+		"high-performance",
+		"low-overhead",
+		"deterministic",
+		"php8",
+		"citomni",
+		"citomni-framework",
+		"citomni-php",
+		"green-by-design",
+		"deterministic-config",
+		"framework"
+	],
+	"require": {
+		"php": "^8.2",
+		"ext-json": "*",
+		"citomni/kernel": "^1.0",
+		"citomni/infrastructure": "^1.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"CitOmni\\VectorEmbedding\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"CitOmni\\VectorEmbedding\\Tests\\": "tests/"
+		}
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^11.0",
+		"phpstan/phpstan": "^1.11"
+	},
+	"suggest": {
+		"ext-opcache": "Better performance in production.",
+		"citomni/http": "Optional. Install when using VectorEmbedding from HTTP applications.",
+		"citomni/cli": "Optional. Install when using VectorEmbedding from CLI applications or package-provided commands."
+	},
+	"support": {
+		"issues": "https://github.com/citomni/vectorembedding/issues",
+		"source": "https://github.com/citomni/vectorembedding",
+		"docs": "https://github.com/citomni/vectorembedding#readme"
+	},
+	"authors": [
+		{
+			"name": "Lars Grove Mortensen",
+			"homepage": "https://www.citomni.com"
+		}
+	],
+	"config": {
+		"sort-packages": true,
+		"optimize-autoloader": true
+	},
+	"archive": {
+		"exclude": [
+			"/.github",
+			"/docs",
+			"/tests",
+			"/dev",
+			"/examples",
+			"/vendor",
+			"/.editorconfig",
+			"/.gitattributes",
+			"/.gitignore",
+			"/phpunit.xml*",
+			"/.idea",
+			"/.vscode",
+			"/Makefile"
+		]
+	}
+}

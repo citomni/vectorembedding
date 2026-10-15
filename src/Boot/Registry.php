@@ -16,34 +16,34 @@ declare(strict_types=1);
 namespace CitOmni\VectorEmbedding\Boot;
 
 /**
- * Declare this provider package's boot contributions.
+ * Registry: Boot contributions of citomni/vectorembedding.
  *
- * Behavior:
- * - Registers HTTP and CLI service bindings for the vector embedding service.
- * - Registers HTTP and CLI cfg overlays for vectorembedding.
+ * Declares what the package adds to a host app as constant arrays. Merging them with the host
+ * app's own maps, and deciding what wins, belongs to the kernel.
  *
- * Notes:
- * - This package does not register HTTP routes.
- * - This package does not register CLI commands in V1.
- * - HTTP and CLI reuse the same service map and cfg overlay.
+ * Rules:
+ * - Constants only: No IO, no runtime branching and no environment reads.
+ * - Services and cfg that work in both modes go in MAP_COMMON and CFG_COMMON. A mode-specific
+ *   constant holds only values that depend on one runtime.
+ * - Ship empty API keys. Real keys belong in the host app's cfg.
  */
 final class Registry {
 
 	/**
-	 * HTTP service map.
+	 * Services for HTTP and CLI.
 	 *
 	 * @var array<string, string|array<string, mixed>>
 	 */
-	public const MAP_HTTP = [
+	public const array MAP_COMMON = [
 		'vectorEmbedder' => \CitOmni\VectorEmbedding\Service\VectorEmbedder::class,
 	];
 
 	/**
-	 * HTTP cfg overlay.
+	 * Cfg baseline for HTTP and CLI.
 	 *
 	 * @var array<string, mixed>
 	 */
-	public const CFG_HTTP = [
+	public const array CFG_COMMON = [
 		'vectorembedding' => [
 			'default_profile' => 'openai-text-embedding-3-small',
 			// 'cache' => [
@@ -91,7 +91,7 @@ final class Registry {
 	 *
 	 * @var array<string, array<string, mixed>>
 	 */
-	public const ROUTES_HTTP = [
+	public const array ROUTES_HTTP = [
 		// '/hello' => [
 			// 'controller' => \CitOmni\ProviderSkeleton\Controller\HelloController::class,
 			// 'action'     => 'index',
@@ -104,25 +104,11 @@ final class Registry {
 	];
 
 	/**
-	 * CLI service map.
-	 *
-	 * @var array<string, string|array<string, mixed>>
-	 */
-	public const MAP_CLI = self::MAP_HTTP;
-
-	/**
-	 * CLI cfg overlay.
-	 *
-	 * @var array<string, mixed>
-	 */
-	public const CFG_CLI = self::CFG_HTTP;
-
-	/**
 	 * CLI commands.
 	 *
 	 * @var array<string, array<string, mixed>>
 	 */
-	public const COMMANDS_CLI = [
+	public const array COMMANDS_CLI = [
 		'vectorembedding:embed' => [
 			'command' => \CitOmni\VectorEmbedding\Command\EmbedCommand::class,
 			'description' => 'Generate embedding vectors for input text',

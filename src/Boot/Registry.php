@@ -45,15 +45,19 @@ final class Registry {
 	 */
 	public const array CFG_COMMON = [
 		'vectorembedding' => [
-			'default_profile' => 'openai-text-embedding-3-small',
+			'default_profile' => 'openai-text-embedding-3-small', // Profile for a request that names none.
 			// 'cache' => [
 				// 'enabled' => false,
 				// 'ttl' => 3600,
 			// ],
 			'debug' => [
-				'include_raw_response' => false,
-				'include_built_request' => false,
+				'include_raw_response'  => false, // Put the provider's raw response body in the result's raw key, unless the request sets the flag.
+				'include_built_request' => false, // Put the built provider payload in the result's meta.built_request, unless the request sets the flag.
 			],
+			// Profiles by id. adapter: the EmbeddingAdapterInterface class. provider, model: names the
+			// result reports; model also goes to the provider. base_url: provider API base URL.
+			// api_key: provider key; '' fails the request, so an app must set it. timeout,
+			// connect_timeout: cURL timeouts in seconds.
 			'profiles' => [
 				'openai-text-embedding-3-small' => [
 					'adapter' => \CitOmni\VectorEmbedding\Adapter\OpenAiEmbeddingAdapter::class,

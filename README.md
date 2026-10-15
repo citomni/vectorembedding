@@ -144,7 +144,7 @@ The request may also include a small debug subtree:
 * `include_raw_response`
 * `include_built_request`
 
-These control whether raw provider response data and the built provider payload are attached to the normalized response.
+These control whether raw provider response data and the built provider payload are attached to the normalized response. `vectorembedding.debug` in cfg sets both flags for a request that does not set them.
 
 ## Normalized response format
 

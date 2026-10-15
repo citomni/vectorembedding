@@ -298,14 +298,14 @@ final class VectorEmbedder extends BaseService {
 	 */
 	private function normalizeRequest(array $input): array {
 		$cfg = $this->app->cfg->vectorembedding;
-		$cfgDebug = (array)($cfg->debug ?? []);
+		$cfgDebug = $cfg->debug;
 
 		// Resolve profile: explicit > default_profile config.
 		$profile = '';
 		if (isset($input['profile']) && \is_string($input['profile']) && $input['profile'] !== '') {
 			$profile = $input['profile'];
 		} else {
-			$default = (string)($cfg->default_profile ?? '');
+			$default = (string)$cfg->default_profile;
 			if ($default !== '') {
 				$profile = $default;
 			}
@@ -314,8 +314,8 @@ final class VectorEmbedder extends BaseService {
 		// Normalize debug: request overrides config defaults.
 		$debugInput = isset($input['debug']) ? $input['debug'] : [];
 		$debug = [
-			'include_raw_response' => (bool)($debugInput['include_raw_response'] ?? $cfgDebug['include_raw_response'] ?? false),
-			'include_built_request' => (bool)($debugInput['include_built_request'] ?? $cfgDebug['include_built_request'] ?? false),
+			'include_raw_response' => (bool)($debugInput['include_raw_response'] ?? $cfgDebug->include_raw_response),
+			'include_built_request' => (bool)($debugInput['include_built_request'] ?? $cfgDebug->include_built_request),
 		];
 
 		// Normalize options.
